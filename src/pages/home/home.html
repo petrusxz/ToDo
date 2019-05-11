@@ -1,14 +1,49 @@
+<!-- ion-header é um componente pai que contém a barra de navegação -->
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Início</ion-title>
   </ion-navbar>
 </ion-header>
 
+<!-- ion-content é um componente pai que contém todo o conteúdo de uma página e só pode existir um por página. -->
+<!-- Os atributos dos elementos Ionic como o padding podem ser encontrados neste link: https://ionicframework.com/docs/v3/theming/css-utilities/ -->
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <ion-list>
+    <ion-list-header no-lines>
+      Minhas tarefas
+    </ion-list-header>
+
+    <ion-item *ngFor="let task of tasks">
+      <!-- 
+        O Angular permite que todos os atributos de um elemento possam receber variáveis ou pedaços de códigos, como o atributo name abaixo.
+        Para fazer isso basta colocar os atributos entre colchetes: [name]
+      -->
+      <ion-icon item-start [name]="task.done ? 'checkmark-circle-outline' : 'radio-button-off'"
+        (click)="task.done = !task.done">
+      </ion-icon>
+      {{ task.description }}
+    </ion-item>
+
+    <!-- 
+      Quando usamos o sinal de negação para numbers essas são as operações boolean equivalentes:
+        !0 === false
+        !1 === true 
+      
+      Ou seja, o elemento abaixo soó vai aparecer quando a lista estiver vazia (length === 0)
+    -->
+    <ion-item *ngIf="!tasks.length">
+      <ion-note>
+        Lista vazia
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <!-- Leia mais sobre os eventos do angular aqui: https://angular.io/guide/user-input -->
+    <button ion-fab color="primary" (click)="navToTask()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
