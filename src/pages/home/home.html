@@ -14,15 +14,23 @@
       Minhas tarefas
     </ion-list-header>
 
-    <ion-item *ngFor="let task of tasks">
+    <ion-item *ngFor="let task of tasks; let i=index">
       <!-- 
         O Angular permite que todos os atributos de um elemento possam receber variáveis ou pedaços de códigos, como o atributo name abaixo.
         Para fazer isso basta colocar os atributos entre colchetes: [name]
       -->
-      <ion-icon item-start [name]="task.done ? 'checkmark-circle-outline' : 'radio-button-off'"
+      <ion-icon item-start 
+        [name]="task.done ? 'checkmark-circle-outline' : 'radio-button-off'"
         (click)="task.done = !task.done">
       </ion-icon>
-      {{ task.description }}
+
+      <span (click)="editTask(task.description, i)">
+        {{ task.description }}
+      </span>
+
+      <ion-icon item-end name="trash" color="danger" 
+        (click)="deleteTask(i)">
+      </ion-icon>
     </ion-item>
 
     <!-- 
@@ -41,7 +49,7 @@
 
   <ion-fab right bottom>
     <!-- Leia mais sobre os eventos do angular aqui: https://angular.io/guide/user-input -->
-    <button ion-fab color="primary" (click)="navToTask()">
+    <button ion-fab color="primary" navPush="TaskPage">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

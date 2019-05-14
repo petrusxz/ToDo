@@ -19,19 +19,31 @@ export class HomePage {
   // Mais sobre: https://blog.ionicframework.com/navigating-lifecycle-events/
   ionViewDidEnter(): void {
     // NavParams possui um método específico para recuperar parâmetros de navegação através de um nome de variável
-    const taskDescription = this.navParams.get('description');
+    const { description } = this.navCtrl.getByIndex(0).data;
+    const { index } = this.navCtrl.getByIndex(0).data;
 
-    if (taskDescription) {
-      const newTask = { 
-        description: taskDescription, 
-        done: false 
+    if (description && index === undefined) {
+      const newTask = {
+        description: description,
+        done: false
       };
 
       this.tasks.push(newTask);
+    } else if (index !== undefined) {
+      this.tasks[index].description = description;
     }
   }
 
-  navToTask(): void {
-    this.navCtrl.push('TaskPage');
+  private deleteTask(index: number): void {
+    this.tasks.splice(index, 1);
+  }
+
+  editTask(description: string, index: number): void {
+    const task = {
+      description: description,
+      index: index
+    };
+
+    this.navCtrl.push('TaskPage', task);
   }
 }
