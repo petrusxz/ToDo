@@ -8,15 +8,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TaskPage {
 
-  public task: { description: string, index: number };
   public description: string; 
+  public index: number;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) { 
-    this.task = this.navParams.data.description ? this.navParams.data : {};
-    this.description = this.task.description;
+    this.description = this.navParams.get('description');
+    this.index = this.navParams.get('index');
   }
 
   ionViewDidLoad() {
@@ -29,7 +29,7 @@ export class TaskPage {
     
     // Vamos injetar dentro do NavParams da página anterior a descrição da nova tarefa criando uma variável 'description' dentro de 'data'
     homePage.data.description = this.description;
-    homePage.data.index = this.task.index;
+    homePage.data.index = this.index;
     
     this.navCtrl.pop();
   }

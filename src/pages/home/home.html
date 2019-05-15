@@ -21,7 +21,7 @@
       -->
       <ion-icon item-start 
         [name]="task.done ? 'checkmark-circle-outline' : 'radio-button-off'"
-        (click)="task.done = !task.done">
+        (click)="markAsDone(task)">
       </ion-icon>
 
       <span (click)="editTask(task.description, i)">
