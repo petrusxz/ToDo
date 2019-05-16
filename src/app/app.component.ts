@@ -10,10 +10,11 @@ export class MyApp {
   rootPage = 'HomePage';
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+    platform.ready()
+      .then(() => {
+        statusBar.styleDefault();
+        splashScreen.hide();
+      });
   }
 }
 

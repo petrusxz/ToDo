@@ -11,6 +11,7 @@ import { Task } from '../../models/task.model';
 export class HomePage {
 
   public tasks: Task[] = [];
+  public today = (new Date()).toISOString();
 
   constructor(
     public navCtrl: NavController,

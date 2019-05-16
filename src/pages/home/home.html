@@ -11,10 +11,10 @@
 
   <ion-list>
     <ion-list-header no-lines>
-      Minhas tarefas
+      Minhas tarefas - {{ today | date:'EEEE, dd/MM/yyyy' }}
     </ion-list-header>
 
-    <ion-item *ngFor="let task of tasks; let i=index">
+    <ion-item *ngFor="let task of tasks; let i=index" [ngClass]="{'marked': task.done === true}">
       <!-- 
         O Angular permite que todos os atributos de um elemento possam receber variáveis ou pedaços de códigos, como o atributo name abaixo.
         Para fazer isso basta colocar os atributos entre colchetes: [name]

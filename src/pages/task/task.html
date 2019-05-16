@@ -19,7 +19,7 @@
 
   <button ion-button icon-start (click)="addTask()">
     <ion-icon name="add"></ion-icon>
-    {{ task?.description ? 'Editar' : 'Adicionar' }}
+    {{ index !== undefinied ? 'Editar' : 'Adicionar' }}
   </button>
 
 </ion-content>
