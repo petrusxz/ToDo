@@ -13,6 +13,8 @@ export class HomePage {
   public tasks: Task[] = [];
   public today = (new Date()).toISOString();
 
+  public search: string = '';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -20,6 +22,9 @@ export class HomePage {
     public toastCtrl: ToastController
   ) { }
 
+
+  // Lifecycles são métodos que estão presentes em toda página Ionic para rastrear eventos de inicialização de páginas. 
+  // Mais sobre: https://blog.ionicframework.com/navigating-lifecycle-events/
   ionViewDidLoad(): void {
     this.storage.forEach((value: any, key: string) => {
       this.tasks.push(value);
@@ -27,8 +32,6 @@ export class HomePage {
       .catch(this.handleError);
   }
 
-  // Lifecycles são métodos que estão presentes em toda página Ionic para rastrear eventos de inicialização de páginas. 
-  // Mais sobre: https://blog.ionicframework.com/navigating-lifecycle-events/
   ionViewDidEnter(): void {
     // NavParams possui um método específico para recuperar parâmetros de navegação através de um nome de variável    
     const { description, index } = this.navCtrl.getByIndex(0).data;
@@ -82,6 +85,7 @@ export class HomePage {
 
     toast.present();
   }
+
 
   handleError(error: any): void {
     this.presentToast('Ocorreu um erro! Por favor, tente mais tarde.');

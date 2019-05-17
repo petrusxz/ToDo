@@ -9,12 +9,14 @@
 <!-- Os atributos dos elementos Ionic como o padding podem ser encontrados neste link: https://ionicframework.com/docs/v3/theming/css-utilities/ -->
 <ion-content padding>
 
+  <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+
   <ion-list>
     <ion-list-header no-lines>
       Minhas tarefas - {{ today | date:'EEEE, dd/MM/yyyy' }}
     </ion-list-header>
 
-    <ion-item *ngFor="let task of tasks; let i=index" [ngClass]="{'marked': task.done === true}">
+    <ion-item *ngFor="let task of tasks | filter:'descriptio':search; let i=index" [ngClass]="{'marked': task.done === true}">
       <!-- 
         O Angular permite que todos os atributos de um elemento possam receber variáveis ou pedaços de códigos, como o atributo name abaixo.
         Para fazer isso basta colocar os atributos entre colchetes: [name]
